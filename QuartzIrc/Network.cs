@@ -1,10 +1,4 @@
-﻿/*
- * $Author: jason $
- * $Id: Network.cs 16 2012-11-19 00:13:50Z jason $
- * $Rev: 16 $
- * */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
