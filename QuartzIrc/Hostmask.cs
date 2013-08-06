@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Quartz
+namespace QuartzIrc
 {
     /// <summary>
     /// Represents a users hostmask, and provides functions to manipulate string representations of hostmasks

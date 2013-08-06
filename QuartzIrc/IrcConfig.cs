@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Quartz
+namespace QuartzIrc
 {
     /// <summary>
     /// Define configuration information for an IRC Client (IrcClient)

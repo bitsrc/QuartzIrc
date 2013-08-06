@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Quartz
+namespace QuartzIrc
 {
     /// <summary>
     /// Parses IRC commands into prefix|command|parameters

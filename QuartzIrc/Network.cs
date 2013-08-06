@@ -8,7 +8,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
-namespace Quartz
+namespace QuartzIrc
 {
     /// <summary>
     /// Provides network interaction wrapping

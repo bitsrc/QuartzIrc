@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 
-namespace Quartz
+namespace QuartzIrc
 {
     public delegate void IrcEventHandler(IrcClient sender, IrcEventArgs e);
     public delegate void IrcRawEventHandler(IrcClient sender, String raw);

@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Quartz
+namespace QuartzIrc
 {
     /// <summary>
     /// Representation of a channel on IRC
