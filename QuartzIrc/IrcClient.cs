@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace QuartzIrc
@@ -234,7 +235,7 @@ namespace QuartzIrc
                     return;
                 }
 
-                Console.WriteLine(incoming);
+                //Console.WriteLine(incoming);
                 if (EventRawIn != null)
                 {
                     EventRawIn(this, incoming);
@@ -377,7 +378,7 @@ namespace QuartzIrc
                     default:
                         if (Int32.TryParse(message.Command, out numeric))
                         {
-                            Console.WriteLine(Enum.GetName(typeof(IrcNumerics), numeric));
+                            //Console.WriteLine(Enum.GetName(typeof(IrcNumerics), numeric));
                             FireNumeric((IrcNumerics)numeric, new IrcEventArgs(message.Prefix, message.Parameters[0], message.Parameters.Skip(1).ToArray()));
                         }
                         break;
@@ -562,6 +563,18 @@ namespace QuartzIrc
             Raw("TOPIC {0} :{1}", channel, topic);
         }
 
+        public void Quit()
+        {
+            Quit("");
+        }
+
+        public void Quit(String reason)
+        {
+            Raw("QUIT :{0}", reason);
+            net.Disconnect();
+            
+        }
+
         #endregion
 
         #region Events
@@ -574,6 +587,11 @@ namespace QuartzIrc
         /// A message sent directly to the user.
         /// </summary>
         public event IrcEventHandler EventPrivateMessage;
+
+        /// <summary>
+        /// A command sent to a channel
+        /// </summary>
+        public event IrcEventHandler EventPublicCommand;
 
         /// <summary>
         /// A CTCP ACTION sent to a channel
@@ -663,7 +681,7 @@ namespace QuartzIrc
             if (Hostmask.ToNick(e.Sender) == sender.Nick)
             {
                 //I want to access Channels here
-                Console.WriteLine("Joined {0}", string.Join(" ", e.Args));
+                //Console.WriteLine("Joined {0}", string.Join(" ", e.Args));
                 foreach (string chan in e.Args)
                 {
                     Channels[chan] = new Channel(this, chan);
@@ -732,7 +750,7 @@ namespace QuartzIrc
             {
                 EventConnect(this, e);
             }
-            Console.WriteLine("Welcome event received");
+            //Console.WriteLine("Welcome event received");
         }
 
         protected void OnTopic(IrcClient sender, IrcNumerics numeric, IrcEventArgs e)
@@ -743,6 +761,17 @@ namespace QuartzIrc
         protected void OnPublicMessage(IrcClient sender, IrcEventArgs e)
         {
             Channels[e.Target].PerformMessage(this, e);
+            if ((!String.IsNullOrEmpty(config.CommandOperators)) && (EventPublicCommand != null))
+            {
+                Match match = Regex.Match(String.Join(" ", e.Args), String.Format(@"^[{0}](\w+)\s?(.*)$", config.CommandOperators));
+                if (match.Success)
+                { //Line is an intended bot command
+                    String command = match.Groups[1].ToString();
+                    String parameters = match.Groups[2].ToString();
+                    IrcEventArgs args = new IrcEventArgs(e.Sender, e.Target, new String[2] { command, parameters });
+                    EventPublicCommand(sender, args);
+                }
+            }
         }
 
         protected void OnPublicNotice(IrcClient sender, IrcEventArgs e)

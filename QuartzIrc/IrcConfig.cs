@@ -204,6 +204,12 @@ namespace QuartzIrc
             set;
         }
 
+        public String CommandOperators
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Constructors
@@ -230,7 +236,7 @@ namespace QuartzIrc
                 Ident = nick;
             }
             Realname = nick;
-            Version = "Quartz IRC Framework - Phate";
+            Version = "Quartz IRC Framework";
             WebIrc = false;
             WebIrcPassword = String.Empty;
             ServerPassword = String.Empty;
@@ -240,6 +246,7 @@ namespace QuartzIrc
             ReconnectWaitTime = 1000;
             CtcpPing = true;
             CtcpTime = true;
+            CommandOperators = String.Empty;
         }
 
         #endregion
