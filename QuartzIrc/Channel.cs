@@ -105,7 +105,7 @@ namespace QuartzIrc
         {
             if (EventJoin != null)
                 EventJoin(sender, e);
-            Console.WriteLine("{0} joined {1}",Hostmask.ToNick(e.Sender),this);
+            //Console.WriteLine("{0} joined {1}",Hostmask.ToNick(e.Sender),this);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace QuartzIrc
         {
             if (EventSelfJoin != null)
                 EventSelfJoin(sender, e);
-            Console.WriteLine("I joined: {0}", this);
+            //Console.WriteLine("I joined: {0}", this);
         }
 
         /// <summary>
