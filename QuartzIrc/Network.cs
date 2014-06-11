@@ -87,6 +87,11 @@ namespace QuartzIrc
         }
 
 
+        public void Disconnect()
+        {
+            Client.Close();
+        }
+
         /// <summary>
         /// Read a line from the connection, blocking.
         /// </summary>
