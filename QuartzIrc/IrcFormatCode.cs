@@ -11,5 +11,8 @@ namespace QuartzIrc
     public static class IrcFormatCode
     {
         public const String Reset = "";
+        public const String Bold = "";
+        public const String Reverse = "";
+        public const String Underline = "";
     }
 }
