@@ -589,7 +589,7 @@ namespace QuartzIrc
         public event IrcEventHandler EventPrivateMessage;
 
         /// <summary>
-        /// A command sent to a channel
+        /// A command sent to a channel. Args array: [0] = Command without operator, [1] = Parameter string
         /// </summary>
         public event IrcEventHandler EventPublicCommand;
 
