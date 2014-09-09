@@ -763,12 +763,13 @@ namespace QuartzIrc
             Channels[e.Target].PerformMessage(this, e);
             if ((!String.IsNullOrEmpty(config.CommandOperators)) && (EventPublicCommand != null))
             {
-                Match match = Regex.Match(String.Join(" ", e.Args), String.Format(@"^[{0}](\w+)\s?(.*)$", config.CommandOperators));
+                String line = String.Join(" ", e.Args);
+                Match match = Regex.Match(line, String.Format(@"^[{0}](\w+)\s?(.*)$", config.CommandOperators));
                 if (match.Success)
                 { //Line is an intended bot command
                     String command = match.Groups[1].ToString();
                     String parameters = match.Groups[2].ToString();
-                    IrcEventArgs args = new IrcEventArgs(e.Sender, e.Target, new String[2] { command, parameters });
+                    IrcEventArgs args = new IrcEventArgs(e.Sender, e.Target, parameters.Split(' '), command, line);
                     EventPublicCommand(sender, args);
                 }
             }
