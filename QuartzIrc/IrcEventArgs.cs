@@ -40,6 +40,12 @@ namespace QuartzIrc
             private set;
         }
 
+        public String FullCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region Constructor
@@ -56,6 +62,14 @@ namespace QuartzIrc
             Sender = sender;
             Target = target;
             Args = args;
+        }
+
+        public IrcEventArgs(String sender, String target, String[] args, String fullCommand)
+        {
+            Sender = sender;
+            Target = target;
+            Args = args;
+            FullCommand = fullCommand;
         }
 
         #endregion
