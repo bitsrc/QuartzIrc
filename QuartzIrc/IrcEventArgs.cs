@@ -40,6 +40,18 @@ namespace QuartzIrc
             private set;
         }
 
+        /// <summary>
+        /// The command invoked to cause this event
+        /// </summary>
+        public String Command
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The full text of the command message
+        /// </summary>
         public String FullCommand
         {
             get;
@@ -64,11 +76,20 @@ namespace QuartzIrc
             Args = args;
         }
 
-        public IrcEventArgs(String sender, String target, String[] args, String fullCommand)
+        /// <summary>
+        /// Constructor for a command event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="target"></param>
+        /// <param name="args"></param>
+        /// <param name="command"></param>
+        /// <param name="fullCommand"></param>
+        public IrcEventArgs(String sender, String target, String[] args, String command, String fullCommand)
         {
             Sender = sender;
             Target = target;
             Args = args;
+            Command = command;
             FullCommand = fullCommand;
         }
 
