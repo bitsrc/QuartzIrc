@@ -231,8 +231,15 @@ namespace QuartzIrc
                             Thread.Sleep(config.ReconnectWaitTime);
                             Connect();
                         }
+                        else
+                        {
+                            return;
+                        }
                     }
-                    return;
+                    else
+                    {
+                        return;
+                    }
                 }
 
                 //Console.WriteLine(incoming);

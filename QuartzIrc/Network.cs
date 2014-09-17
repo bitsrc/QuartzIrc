@@ -49,6 +49,11 @@ namespace QuartzIrc
         /// <param name="ssl">Whether to use SSL when connecting or not</param>
         public void Connect(String host, int port, bool ssl)
         {
+            if (Client.Connected)
+            {
+                Client.Close();
+                Client = new TcpClient();
+            }
             //Logger.Trace("Connecting");
             Client.Connect(host, port);
             if (ssl)
